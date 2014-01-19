@@ -8,6 +8,7 @@ from math import ceil
 
 number_of_pixels = 48
 simultaneously_changing = 10
+unused_leds_start = 2
 
 # returns a random target with a list of R, G and B
 def create_target():
@@ -83,7 +84,7 @@ while True:
     for led in pixelmap:
         data += chr(led[0])+chr(led[1])+chr(led[2])
 
-    spidev.write(bytearray(b'\x00\x00\x00\x00\x00\x00')+data)
+    spidev.write(bytearray(b'\x00\x00\x00'*unused_leds_start)+data)
     spidev.flush()
     sleep(0.002)
 	
